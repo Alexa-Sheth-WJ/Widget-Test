@@ -1,0 +1,132 @@
+{
+  "customer": "The Venetian Resort Las Vegas",
+  "widgetType": "Custom (Recognition Directory)",
+  "title": "Bravo! Hall of Honor",
+  "branding": {
+    "logos": [
+      {
+        "name": "Company logo (griffin + wordmark)",
+        "sourceMime": "image/jpeg",
+        "embeddedMime": "image/png",
+        "treatment": "Background removed; alpha mask recolored via CSS (maroon in light mode, cream in dark mode)",
+        "bytes": 6806
+      },
+      {
+        "name": "V shield (avatar)",
+        "sourceMime": "image/jpeg",
+        "embeddedMime": "image/png",
+        "treatment": "Alpha mask; replaces full logo in frames 260px tall or less",
+        "bytes": 1330
+      },
+      {
+        "name": "Bravo! Winner badge",
+        "sourceMime": "image/jpeg",
+        "embeddedMime": "image/jpeg",
+        "treatment": "Cropped to circle, 240px; shown beside totals in frames over 420px tall",
+        "bytes": 8878
+      }
+    ],
+    "primaryColor": "#5E000A",
+    "secondaryColor": "#FBEEDA",
+    "accentColor": "#E83F55",
+    "accentColors": {
+      "ok": null,
+      "warn": null,
+      "bad": null,
+      "note": "Skipped per customer"
+    }
+  },
+  "content": {
+    "primaryMetric": {
+      "label": "Team members honored since 1999",
+      "value": "Distinct people in the roster, de-duplicated by hashed employee number, or by name where no number exists (1,815)"
+    },
+    "secondaryMetrics": [
+      {
+        "label": "Bravo! awards",
+        "value": "Total awards, one per honor (1,921)"
+      }
+    ],
+    "list": "Every award as its own row, grouped by quarter, newest first (Q4 2025 back to 1999); rendered in batches on scroll",
+    "search": "Name search, as-you-type (120 ms debounce), case- and accent-insensitive, multi-word AND match, matched text underlined; Escape clears",
+    "statusStates": {
+      "standard": {
+        "trigger": "employeeCode absent or never honored",
+        "greeting": null
+      },
+      "personalHonoree": {
+        "trigger": "hash(employeeid or employeeCode) matches one or more roster rows",
+        "label": "Congratulations, {roster name}",
+        "detail": "{n} Bravo! award(s): up to 3 quarters, then 'and N more'",
+        "behavior": "Own rows highlighted and starred; 'Show mine' filters to the viewer's awards; compact frames show the name only"
+      }
+    },
+    "emptyState": "No honorees match \"{query}\". Check the spelling or try just a first or last name.",
+    "timeWindows": null,
+    "tone": "Celebratory, polished",
+    "language": "en",
+    "privacy": "Employee numbers never displayed; stored only as FNV-1a 32-bit hashes for matching"
+  },
+  "data": {
+    "primaryParam": "employeeid",
+    "identityNote": "Not location-scoped; same roster for every location.",
+    "exampleValue": "3132",
+    "workjamVariablesUsed": [
+      "employeeId",
+      "employeeCode",
+      "language",
+      "aspectRatio"
+    ],
+    "workjamVariablesRead": [
+      "externalLocationId",
+      "externalLocationCode",
+      "address",
+      "city",
+      "stateOrProvince",
+      "country",
+      "zipCode",
+      "externalRegionId",
+      "externalRegionCode",
+      "employeeId",
+      "employeeCode",
+      "username",
+      "language",
+      "aspectRatio"
+    ],
+    "customVariables": [
+      {
+        "name": "search",
+        "type": "string",
+        "fallback": "empty (full list)",
+        "displayRule": "Pre-fills the search box"
+      }
+    ],
+    "dataSource": "Static, embedded from Quarterly_Bravo_Recognition_Program.pdf (same cleaned roster as Bravo! Winners widget)",
+    "refreshMs": null,
+    "matching": {
+      "order": [
+        "employeeid (any capitalization)",
+        "employeeCode (fallback)"
+      ],
+      "accepted": "Digits with optional leading zeros or a short letter prefix (61854, 0061854, TM61854, TM-61854)",
+      "ignored": "Unresolved tokens like {{employeeId}}, non-numeric IDs (e.g. UUIDs), unknown numbers -> standard view",
+      "result": "Matched name shown as 'Congratulations, {name}' with award count and quarters"
+    },
+    "paramNamesCaseInsensitive": true
+  },
+  "display": {
+    "defaultAspectRatio": "standard",
+    "supportedAspectRatios": [
+      "standard",
+      "square",
+      "landscape",
+      "portrait"
+    ],
+    "renderingContext": "Phone tile",
+    "layoutTiers": "Over 420px tall: badge shown; 330px or less: totals hidden; 260px or less: shield replaces logo, count hidden, personal strip compacts",
+    "exampleUrl": "https://alexa-sheth-wj.github.io/Test-Widget-2/?employeeid={{employeeId}}&language={{language}}&aspectRatio=standard"
+  },
+  "fileSizeBytes": 92138,
+  "version": "1.1.0",
+  "builtOn": "2026-10-06"
+}
